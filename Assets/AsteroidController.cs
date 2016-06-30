@@ -10,8 +10,14 @@ public class AsteroidController : MonoBehaviour {
 
     public bool randomizeOnLoad = true;
 
-	// Use this for initialization
-	void Start () {
+    // Temp bounds for wrapping asteroids.
+    // TODO: this should be dynamically a bit bigger than the SteamVR play area
+    private const float minX = -2, maxX = 2;
+    private const float minY = 0.2f, maxY = 2;
+    private const float minZ = -2, maxZ = 2;
+
+    // Use this for initialization
+    void Start () {
 
         if (randomizeOnLoad)
         {
@@ -28,12 +34,26 @@ public class AsteroidController : MonoBehaviour {
 
             //launch the asteroid in some random direction with (small) velocity
             Rigidbody rb = GetComponent<Rigidbody>();
-            rb.velocity = Random.insideUnitSphere * 0.1f;
+            rb.velocity = Random.insideUnitSphere * 0.5f;
         }
     }
 	
 	// Update is called once per frame
 	void Update () {
+
+        Rigidbody rb = GetComponent<Rigidbody>();
+        Vector3 position = rb.position;
+
+        if (position.x < minX) position.x = maxX;
+        if (position.x > maxX) position.x = minX;
+
+        if (position.y < minY) position.y = maxY;
+        if (position.y > maxY) position.y = minY;
+
+        if (position.z < minZ) position.z = maxZ;
+        if (position.z > maxZ) position.z = minZ;
+
+        rb.position = position;
 
     }
 
