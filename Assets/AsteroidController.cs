@@ -28,7 +28,7 @@ public class AsteroidController : MonoBehaviour {
 
             //launch the asteroid in some random direction with (small) velocity
             Rigidbody rb = GetComponent<Rigidbody>();
-            rb.velocity = new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f));
+            rb.velocity = Random.insideUnitSphere * 0.1f;
         }
     }
 	
@@ -46,8 +46,9 @@ public class AsteroidController : MonoBehaviour {
 
         Vector3 centerToLocalContact = transform.InverseTransformPoint(worldContactPoint);
         Vector3 localContactDirection = transform.InverseTransformDirection(projectileDirection);
+        Vector3 planeNormal = Vector3.Cross(centerToLocalContact, localContactDirection);
 
-        GameObject[] children = AsteroidSplitter.Cut(gameObject, centerToLocalContact, localContactDirection);
+        GameObject[] children = AsteroidSplitter.Cut(gameObject, centerToLocalContact, planeNormal.normalized);
         Destroy(gameObject);
     }
 }

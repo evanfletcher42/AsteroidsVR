@@ -29,7 +29,7 @@ public class projectileController : MonoBehaviour {
 
         if(collision.collider.name.Equals("Asteroid"))
         {
-            collision.collider.GetComponent<AsteroidController>().Split(collision.contacts[0].point, transform.forward);
+            collision.collider.GetComponent<AsteroidController>().Split(collision.contacts[0].point, GetComponent<Rigidbody>().velocity.normalized);
         }
     }
 }
