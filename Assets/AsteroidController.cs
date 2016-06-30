@@ -13,7 +13,7 @@ public class AsteroidController : MonoBehaviour {
     // Temp bounds for wrapping asteroids.
     // TODO: this should be dynamically a bit bigger than the SteamVR play area
     private const float minX = -2, maxX = 2;
-    private const float minY = 0.2f, maxY = 2;
+    private const float minY = 0.2f, maxY = 3;
     private const float minZ = -2, maxZ = 2;
 
     // Use this for initialization
@@ -36,6 +36,10 @@ public class AsteroidController : MonoBehaviour {
             Rigidbody rb = GetComponent<Rigidbody>();
             rb.velocity = Random.insideUnitSphere * 0.5f;
         }
+
+        // Even if not randomized, this might've been created from a split,
+        // in which case we need to use the new, smaller mesh.
+        GetComponent<MeshCollider>().sharedMesh = GetComponent<MeshFilter>().mesh;
     }
 	
 	// Update is called once per frame
