@@ -27,7 +27,7 @@ public class projectileController : MonoBehaviour {
         Destroy(ex, 0.25f);
         Destroy(gameObject);
 
-        if(collision.collider.name.Equals("Asteroid"))
+        if(collision.collider.CompareTag("Asteroids"))
         {
             collision.collider.GetComponent<AsteroidController>().Split(collision.contacts[0].point, GetComponent<Rigidbody>().velocity.normalized);
         }
