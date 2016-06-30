@@ -277,7 +277,7 @@ public class AsteroidSplitter {
             leftSideObject.transform.rotation = baseObj.transform.rotation;
 
             // Give it a bit of a push away from the other half.
-            leftSideObject.GetComponent<Rigidbody>().velocity = baseObj.GetComponent<Rigidbody>().velocity + baseObj.transform.TransformDirection(planeNormal * 0.50f);
+            leftSideObject.GetComponent<Rigidbody>().velocity = baseObj.GetComponent<Rigidbody>().velocity + baseObj.transform.TransformDirection(planeNormal * 1.0f);
 
             Vector3[] leftFinalVerts = leftSideVerts.ToArray();
             int[] leftFinalTris = leftSideTris.ToArray();
@@ -290,8 +290,6 @@ public class AsteroidSplitter {
             m.RecalculateBounds();
             m.RecalculateNormals();
 
-            leftSideObject.name = "Asteroid";
-
             leftSideObject.GetComponent<AsteroidController>().randomizeOnLoad = false;
         }
 
@@ -303,7 +301,7 @@ public class AsteroidSplitter {
             rightSideObject.transform.rotation = baseObj.transform.rotation;
 
             // Give it a bit of a push away from the other half.
-            rightSideObject.GetComponent<Rigidbody>().velocity = baseObj.GetComponent<Rigidbody>().velocity + baseObj.transform.TransformDirection( planeNormal * -0.50f);
+            rightSideObject.GetComponent<Rigidbody>().velocity = baseObj.GetComponent<Rigidbody>().velocity + baseObj.transform.TransformDirection( planeNormal * -1.0f);
 
             Vector3[] rightFinalVerts = rightSideVerts.ToArray();
             int[] rightFinalTris = rightSideTris.ToArray();
@@ -315,7 +313,6 @@ public class AsteroidSplitter {
 
             m.RecalculateBounds();
             m.RecalculateNormals();
-            rightSideObject.name = "Asteroid";
 
             rightSideObject.GetComponent<AsteroidController>().randomizeOnLoad = false;
         }
